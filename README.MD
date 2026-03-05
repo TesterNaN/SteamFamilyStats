@@ -1,4 +1,4 @@
-# Steam Family Library Contribution Analyzer
+# Steam Family Analyzer
 
 Steam家庭库贡献统计工具  
 一个自动登录 Steam、获取家庭共享库并统计成员贡献度的 Python 脚本。
@@ -86,4 +86,5 @@ MIT License
 ---
 
 **Steam Family Library Contribution Analyzer**  
+
 帮助家庭组管理员轻松了解每位成员的贡献度！
