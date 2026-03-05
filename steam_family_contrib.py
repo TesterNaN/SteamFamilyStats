@@ -642,6 +642,15 @@ class SteamLogin:
 
 # ---------- 主程序 ----------
 def main():
+    print("╔════════════════════════════════════════════╗")
+    print("║                                            ║")
+    print("║        Steam Family Analyzer v1.0          ║")
+    print("║                                            ║")
+    print("║            家庭库贡献统计工具              ║")
+    print("║                                            ║")
+    print("╚════════════════════════════════════════════╝")
+    print()
+    
     while True:
         # 尝试从文件加载保存的 store cookie
         cookie_value = load_store_cookie()
@@ -682,3 +691,4 @@ def main():
 if __name__ == '__main__':
     main()
     input("\n按 Enter 键退出...")
+
