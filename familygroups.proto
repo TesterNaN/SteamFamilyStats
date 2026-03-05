@@ -1,0 +1,98 @@
+syntax = "proto2";
+
+message CFamilyGroups_GetSharedLibraryApps_Request {
+    optional fixed64 family_groupid = 1;
+    optional bool include_own = 2;
+    optional bool include_excluded = 3;
+    optional string language = 5;
+    optional uint32 max_apps = 6;
+    optional bool include_non_games = 7;
+    optional fixed64 steamid = 8;
+}
+
+message CFamilyGroups_GetSharedLibraryApps_Response {
+    repeated CFamilyGroups_GetSharedLibraryApps_Response_SharedApp apps = 1;
+    optional fixed64 owner_steamid = 2;
+}
+
+message CFamilyGroups_GetSharedLibraryApps_Response_SharedApp {
+    optional uint32 appid = 1;
+    repeated fixed64 owner_steamids = 2;
+    optional string name = 6;
+    optional string sort_as = 7;
+    optional string capsule_filename = 8;
+    optional string img_icon_hash = 9;
+    optional int32 exclude_reason = 10 [default = 0];
+    optional uint32 rt_time_acquired = 11;
+    optional uint32 rt_last_played = 12;
+    optional uint32 rt_playtime = 13;
+    optional int32 app_type = 14 [default = 1];
+    repeated uint32 content_descriptors = 15;
+}
+
+message CFamilyGroups_GetFamilyGroup_Request {
+    optional uint64 family_groupid = 1;
+    optional bool send_running_apps = 2;
+}
+
+message CFamilyGroups_GetFamilyGroup_Response {
+    optional string name = 1;
+    repeated FamilyGroupMember members = 2;
+    repeated FamilyGroupPendingInvite pending_invites = 3;
+    optional uint32 free_spots = 4;
+    optional string country = 5;
+    optional uint32 slot_cooldown_remaining_seconds = 6;
+    repeated FamilyGroupFormerMember former_members = 7;
+    optional uint32 slot_cooldown_overrides = 8;
+}
+
+message FamilyGroupMember {
+    optional fixed64 steamid = 1;
+    optional int32 role = 2;
+    optional uint32 time_joined = 3;
+    optional uint32 cooldown_seconds_remaining = 4;
+}
+
+message FamilyGroupPendingInvite {
+    optional fixed64 steamid = 1;
+    optional int32 role = 2;
+}
+
+message FamilyGroupFormerMember {
+    optional fixed64 steamid = 1;
+}
+
+// ========== GetFamilyGroupForUser 相关 ==========
+message CFamilyGroups_GetFamilyGroupForUser_Request {
+    optional uint64 steamid = 1;
+    optional bool include_family_group_response = 2;
+}
+
+message CFamilyGroups_GetFamilyGroupForUser_Response {
+    optional uint64 family_groupid = 1;
+    optional bool is_not_member_of_any_group = 2;
+    optional uint32 latest_time_joined = 3;
+    optional uint64 latest_joined_family_groupid = 4;
+    repeated FamilyGroupPendingInviteForUser pending_group_invites = 5;
+    optional uint32 role = 6;
+    optional uint32 cooldown_seconds_remaining = 7;
+    optional CFamilyGroups_GetFamilyGroup_Response family_group = 8;
+    optional bool can_undelete_last_joined_family = 9;
+    repeated FamilyGroupMembership membership_history = 10;
+}
+
+message FamilyGroupPendingInviteForUser {
+    optional uint64 family_groupid = 1;
+    optional int32 role = 2;
+    optional fixed64 inviter_steamid = 3;
+    optional bool awaiting_2fa = 4;
+    optional uint64 invite_id = 5;
+}
+
+message FamilyGroupMembership {
+    optional uint64 family_groupid = 1;
+    optional uint32 rtime_joined = 2;
+    optional uint32 rtime_left = 3;
+    optional uint32 role = 4;
+    optional bool participated = 5;
+}

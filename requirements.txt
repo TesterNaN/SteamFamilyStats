@@ -1,0 +1,7 @@
+pwinput
+pycryptodome
+cryptography
+curl-cffi
+beautifulsoup4
+matplotlib
+protobuf
